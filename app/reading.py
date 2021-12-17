@@ -16,9 +16,9 @@ def read_sensor():
             pass
     data = {
         "timestamp": datetime.now().replace(second=0, microsecond=0).isoformat(),
-        "temperature": temperature - float(config['DATA']['temp_offset']),
-        "pressure": round(pressure - float(config['DATA']['pres_offset']), 2),
-        "humidity": round(humidity - float(config['DATA']['hum_offset']), 2)
+        "temperature": round(temperature + float(config['DATA']['temp_offset']), 2),
+        "pressure": round(pressure + float(config['DATA']['pres_offset']), 2),
+        "humidity": round(humidity + float(config['DATA']['hum_offset']), 2)
     }
     return data
 
