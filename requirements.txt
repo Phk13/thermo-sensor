@@ -2,3 +2,4 @@ APScheduler>=3.7.0
 Flask>=2.0.1
 Flask-RESTful>=0.3.9
 pymongo>=3.11.4
+smbus2>=0.4.2
