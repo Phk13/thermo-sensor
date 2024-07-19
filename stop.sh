@@ -1,2 +1,2 @@
 #!/bin/sh
-kill $(cat server.pid)
+pkill uvicorn

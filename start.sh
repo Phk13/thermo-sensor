@@ -1,2 +1,2 @@
 #!/bin/sh
-nohup gunicorn -w 2 --threads 4 --pid server.pid -b 0.0.0.0:5002 thermo_sensor:app &
+nohup uvicorn --workers 2 --host 0.0.0.0 --port 5002 main:app &
