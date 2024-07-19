@@ -8,11 +8,11 @@ class Config(object):
     }
 
     DB = {
-        "host": "jessie.phk.local",
+        "host": "",
         "port": 27017,
         "name": "thermo",
         "user": "thermo",
-        "pass": "nCgYuP5yVW2gcYRQ",
+        "pass": "",
         "collection": "reading",
     }
 
