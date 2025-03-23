@@ -10,6 +10,20 @@ from fastapi.responses import JSONResponse
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    try:
+        scheduler.start()
+        logger.info("Scheduler started successfully")
+        yield
+    except Exception as e:
+        logger.error(f"Failed to start scheduler: {e}")
+        raise
+    finally:
+        scheduler.shutdown()
+        logger.info("Scheduler shutdown successfully")
+
+
 app = FastAPI(title="Thermo Sensor API", lifespan=lifespan)
 scheduler = AsyncIOScheduler()
 
@@ -30,15 +44,3 @@ async def scheduled_reading():
     """Scheduled task to read and save sensor data."""
     await save_reading()
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    try:
-        scheduler.start()
-        logger.info("Scheduler started successfully")
-        yield
-    except Exception as e:
-        logger.error(f"Failed to start scheduler: {e}")
-        raise
-    finally:
-        scheduler.shutdown()
-        logger.info("Scheduler shutdown successfully")
