@@ -10,6 +10,9 @@ from fastapi.responses import JSONResponse
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+# Initialize scheduler before FastAPI app
+scheduler = AsyncIOScheduler()
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     try:
@@ -25,7 +28,6 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="Thermo Sensor API", lifespan=lifespan)
-scheduler = AsyncIOScheduler()
 
 @app.get("/sensor")
 async def sensor():
@@ -43,4 +45,3 @@ async def sensor():
 async def scheduled_reading():
     """Scheduled task to read and save sensor data."""
     await save_reading()
-
